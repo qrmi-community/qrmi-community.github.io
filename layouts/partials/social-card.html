@@ -1,0 +1,20 @@
+{{- /* Return a 1200x630 link-preview image for the page. Text is drawn on
+  crops of the panel so it wraps inside the card's margins. */ -}}
+{{- $base := resources.Get "images/card-base.png" }}
+{{- $presenters := where (.Params.presenters | default slice) "photo" "!=" nil }}
+{{- $eyebrow := .Params.event | default (cond .IsHome "Quantum Resource Management Interface" site.Title) }}
+{{- with .Params.city }}{{ $eyebrow = printf "%s · %s" $eyebrow . }}{{ end }}
+{{- $subY := cond (gt (len $presenters) 0) 370 300 }}
+{{- $title := $base.Crop "1008x220 Center" | images.Filter (images.Text .Title (dict "size" 58 "color" "#e6e8ee" "linespacing" 8 "x" 0 "y" 0)) }}
+{{- $sub := $base.Crop (printf "1008x%d Center" (sub 570 $subY)) | images.Filter (images.Text (.Params.when | default .Description) (dict "size" 28 "color" "#9aa1ae" "linespacing" 6 "x" 0 "y" 0)) }}
+{{- $filters := slice
+  (images.Text (upper $eyebrow) (dict "size" 24 "color" "#8ea0ff" "x" 96 "y" 92))
+  (images.Overlay $title 96 140)
+  (images.Overlay $sub 96 $subY)
+}}
+{{- $mask := resources.Get "images/circle-mask.png" }}
+{{- range $i, $p := $presenters }}
+{{- $photo := (resources.Get $p.photo).Fill "120x120 Center png" | images.Filter (images.Mask $mask) }}
+{{- $filters = $filters | append (images.Overlay $photo (add 96 (mul $i 136)) 450) }}
+{{- end }}
+{{- return ($base | images.Filter $filters).Process "jpg q88" }}

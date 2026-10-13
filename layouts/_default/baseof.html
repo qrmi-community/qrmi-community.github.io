@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <script>{ const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; }</script>
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ .Description }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{- partial "social-meta.html" . }}
+  {{- if and .IsPage (eq .Type "tutorials") }}{{ partial "event-jsonld.html" . }}{{ end }}
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
+      <nav>
+        {{- range site.Menus.main }}
+        <a href="{{ .URL }}">{{ .Name }}</a>
+        {{- end }}
+        <button class="theme-toggle" type="button" aria-label="Toggle light and dark theme" title="Toggle light and dark theme">
+          <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 2a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    {{ block "main" . }}{{ end }}
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>This site sets no cookies and runs no analytics; your theme choice stays in your browser's local storage. It is hosted on GitHub Pages, and GitHub may collect visitor data under its <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">Privacy Statement</a>.</p>
+      <p>© 2026 QRMI community contributors. Licensed under the <a href="https://github.com/qrmi-community/documentation/blob/main/LICENSE">Apache License 2.0</a>.</p>
+    </div>
+  </footer>
+  <script>
+    document.querySelector(".theme-toggle").addEventListener("click", () => {
+      const root = document.documentElement;
+      const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      root.dataset.theme = dark ? "light" : "dark";
+      localStorage.setItem("theme", root.dataset.theme);
+    });
+  </script>
+</body>
+</html>

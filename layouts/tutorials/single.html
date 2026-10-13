@@ -1,0 +1,39 @@
+{{ define "main" }}
+<article>
+  <p class="eyebrow">{{ .Params.event }}</p>
+  <h1>{{ .Title }}</h1>
+  <dl class="facts">
+    <dt>When</dt><dd>{{ .Params.when }}</dd>
+    {{- with .Params.room }}<dt>Where</dt><dd>Room {{ . }}</dd>{{ end }}
+    {{- with .Params.audience }}<dt>Audience</dt><dd>{{ . }}</dd>{{ end }}
+    {{- with .Params.materials }}<dt>Materials</dt><dd><a href="{{ . }}">{{ strings.TrimPrefix "https://" . }}</a></dd>{{ end }}
+    {{- with .Params.program }}<dt>Program</dt><dd><a href="{{ . }}">Conference program</a></dd>{{ end }}
+  </dl>
+
+  <h2>Abstract</h2>
+  {{ .Content }}
+
+  <h2>Modules</h2>
+  <ol class="modules">
+    {{- range .Params.modules }}
+    <li><strong>{{ .name }}</strong>{{ with .detail }}: {{ . }}{{ end }}</li>
+    {{- end }}
+  </ol>
+
+  <h2>Presenters</h2>
+  <ul class="presenters">
+    {{- range .Params.presenters }}
+    <li>
+      {{- if .url }}<a class="presenter" href="{{ .url }}">{{ else }}<div class="presenter">{{ end }}
+      {{- with .photo }}
+      <img src="{{ (resources.Get .).RelPermalink }}" alt="" width="64" height="64" loading="lazy">
+      {{- else }}
+      <span class="initials" aria-hidden="true">{{ range split .name " " }}{{ substr . 0 1 }}{{ end }}</span>
+      {{- end }}
+      <div><span class="name">{{ .name }}</span><span class="affiliation">{{ .affiliation }}</span></div>
+      {{ if .url }}</a>{{ else }}</div>{{ end }}
+    </li>
+    {{- end }}
+  </ul>
+</article>
+{{ end }}

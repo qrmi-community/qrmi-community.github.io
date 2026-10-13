@@ -1,0 +1,18 @@
+{{- $performers := slice }}
+{{- range .Params.presenters }}
+{{- $performers = $performers | append (dict "@type" "Person" "name" .name "affiliation" (dict "@type" "Organization" "name" .affiliation)) }}
+{{- end }}
+{{- $event := dict
+  "@context" "https://schema.org"
+  "@type" "Event"
+  "name" .Title
+  "description" .Description
+  "startDate" (.Date.Format "2006-01-02")
+  "url" .Permalink
+  "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode"
+  "performer" $performers
+}}
+{{- with .Params.city }}
+{{- $event = merge $event (dict "location" (dict "@type" "Place" "name" (strings.TrimSuffix " Tutorial" $.Params.event) "address" .)) }}
+{{- end }}
+<script type="application/ld+json">{{ $event | jsonify | safeJS }}</script>

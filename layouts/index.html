@@ -1,0 +1,21 @@
+{{ define "main" }}
+<section class="hero">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</section>
+{{ $tutorials := (site.GetPage "/tutorials").Pages }}
+{{ range where $tutorials "Date" "ge" (now.AddDate 0 0 -1) }}
+<section class="card">
+  <p class="eyebrow">Upcoming · {{ .Params.event }}</p>
+  <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  <p>{{ .Params.when }}{{ with .Params.room }} · Room {{ . }}{{ end }}</p>
+  <a class="button" href="{{ .RelPermalink }}">Tutorial details</a>
+</section>
+{{ end }}
+{{ with where $tutorials "Date" "lt" (now.AddDate 0 0 -1) }}
+<h2>Past tutorials</h2>
+{{ partial "tutorial-list.html" . }}
+{{ end }}
+<h2>Papers</h2>
+{{ partial "papers.html" . }}
+{{ end }}

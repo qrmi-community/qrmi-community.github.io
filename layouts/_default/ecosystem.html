@@ -1,0 +1,16 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+{{- range hugo.Data.ecosystem }}
+<h2>{{ .group }}</h2>
+<ul class="projects">
+  {{- range .items }}
+  <li>
+    <a href="{{ .url }}">{{ .name }}</a>{{ with .status }} <span class="badge">{{ . }}</span>{{ end }}
+    <span class="meta">{{ strings.TrimPrefix "https://" .url | strings.TrimPrefix "github.com/" }}</span>
+    <p>{{ .description }}</p>
+  </li>
+  {{- end }}
+</ul>
+{{- end }}
+{{ end }}

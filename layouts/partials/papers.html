@@ -1,0 +1,9 @@
+<ul class="papers">
+  {{- range sort hugo.Data.papers "year" "desc" }}
+  <li>
+    <a href="{{ .url }}">{{ .title }}</a>
+    <span class="meta">{{ .venue }}, {{ .year }}</span>
+    <span class="authors">{{ .authors }}</span>
+  </li>
+  {{- end }}
+</ul>
