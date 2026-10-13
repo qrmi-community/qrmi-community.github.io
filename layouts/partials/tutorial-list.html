@@ -1,0 +1,8 @@
+<ul class="tutorials">
+  {{- range . }}
+  <li>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    <span class="meta">{{ .Params.event }} · {{ .Date.Format "January 2, 2006" }}</span>
+  </li>
+  {{- end }}
+</ul>

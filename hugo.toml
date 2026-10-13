@@ -1,0 +1,31 @@
+baseURL = "https://qrmi-community.github.io/documentation/"
+locale = "en-US"
+title = "QRMI Community"
+buildFuture = true
+disableKinds = ["taxonomy", "term", "RSS"]
+enableGitInfo = true
+
+[frontmatter]
+lastmod = [":git", "lastmod", ":fileModTime"]
+
+[menu]
+[[menu.main]]
+name = "Ecosystem"
+pageRef = "/ecosystem"
+weight = 1
+[[menu.main]]
+name = "Tutorials"
+pageRef = "/tutorials"
+weight = 2
+[[menu.main]]
+name = "Papers"
+pageRef = "/papers"
+weight = 3
+[[menu.main]]
+name = "Docs"
+url = "https://qiskit-community.github.io/qrmi/"
+weight = 4
+[[menu.main]]
+name = "GitHub"
+url = "https://github.com/qiskit-community/qrmi"
+weight = 5
