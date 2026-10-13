@@ -15,28 +15,36 @@
   items:
     - name: Slurm
       url: https://github.com/qiskit-community/spank-plugins
+      tags: [Slurm]
       description: SPANK plugin that adds a --qpu option to Slurm jobs and acquires and releases QPUs through QRMI.
     - name: Slurm license poller
       url: https://github.com/qrmi-community/slurm_poller_daemon_example
+      tags: [Slurm]
       description: Daemon that sets Slurm dynamic license counts from the QRMI-reported status of each quantum resource.
     - name: PBS
       url: https://github.com/qrmi-community/pbs-integration
+      tags: [PBS]
       description: runjob and execjob_end hooks that acquire and release the quantum resource a job requests.
     - name: IBM LSF
       url: https://github.com/qrmi-community/lsf-integration
+      tags: [LSF]
       description: LSF hooks for QRMI, with a container setup based on LSF Community Edition.
     - name: Open Cluster Scheduler / Gridware Cluster Scheduler
       url: https://github.com/hpc-gridware/qpu-resource
+      tags: [OCS, GCS]
       description: QRMI setup for OCS and GCS, submitting jobs with qsub -l qpu=<resource>.
     - name: Flux Framework
       url: https://github.com/qrmi-community/flux-shell-integration
+      tags: [Flux]
       description: Flux shell plugin that runs quantum workloads through QRMI, with Flux as a user-space scheduler.
     - name: Flux quantum co-scheduling
       url: https://github.com/converged-computing/flux-quantum
+      tags: [Flux]
       status: under development
       description: Flux jobtap, validation and client plugins for co-scheduling quantum and classical resources.
     - name: Kubernetes operator
       url: https://github.com/qiskit-community/qrmi/tree/proto/k8s-operator/operator
+      tags: [Kubernetes]
       status: prototype
       description: >-
         Operator with QuantumResource and QuantumResourceClaim custom resources
@@ -44,7 +52,7 @@
         until their claim is bound. Lives on the proto/k8s-operator branch of QRMI.
     - name: Kubernetes scheduler plugin
       url: https://github.com/converged-computing/fluence
-      status: under development
+      tags: [Flux, Kubernetes]
       description: Kubernetes scheduler plugin backed by a Fluxion resource graph that models quantum backends as resources.
 
 - group: Bindings and tools
