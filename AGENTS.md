@@ -7,7 +7,7 @@ first: it covers running, layout and common edits.
 
 The QRMI community website: a Hugo static site with its own layouts and CSS (no
 theme, no Node, no JavaScript). Deployed to
-<https://qrmi-community.github.io/documentation/> by `.github/workflows/hugo.yml`.
+<https://qrmi-community.github.io/> by `.github/workflows/hugo.yml`.
 
 ## Conventions
 
@@ -17,8 +17,8 @@ theme, no Node, no JavaScript). Deployed to
   descriptions) must come from a source: the conference program, the paper on
   arXiv, or the repository README. Do not invent details. Check new URLs load
   (private repos return 404 to visitors and must not be linked).
-- The site is served under `/documentation/`. Build internal links with
-  `.RelPermalink`, `relURL` or `relref`, and menu entries with `pageRef`.
+- Build internal links with `.RelPermalink`, `relURL` or `relref`, and menu
+  entries with `pageRef`, never hard-coded paths.
 - `buildFuture = true` so upcoming tutorials are published; `date` decides
   upcoming versus past.
 - Presenter photos are square JPEGs in `assets/images/presenters/`, named
@@ -43,9 +43,9 @@ delete `public/`; build into a temporary directory and use a separate port:
 
 ```bash
 hugo --quiet --destination /tmp/qrmi-site   # must build with no errors or warnings
-hugo server --renderToMemory --poll 700ms --port 13131   # then open http://localhost:13131/documentation/
+hugo server --renderToMemory --poll 700ms --port 13131   # then open http://localhost:13131/
 google-chrome --headless=new --screenshot=/tmp/page.png --window-size=1100,1500 \
-  http://localhost:13131/documentation/      # optional visual check
+  http://localhost:13131/      # optional visual check
 ```
 
 Stop any server you started when done. A developer's server without `--poll`

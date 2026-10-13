@@ -1,9 +1,10 @@
-baseURL = "https://qrmi-community.github.io/documentation/"
+baseURL = "https://qrmi-community.github.io/"
 locale = "en-US"
 title = "QRMI Community"
 buildFuture = true
 disableKinds = ["taxonomy", "term", "RSS"]
 enableGitInfo = true
+enableRobotsTXT = true
 
 [frontmatter]
 lastmod = [":git", "lastmod", ":fileModTime"]

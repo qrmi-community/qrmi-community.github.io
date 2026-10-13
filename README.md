@@ -1,6 +1,6 @@
 # QRMI Community website
 
-Source for <https://qrmi-community.github.io/documentation/>, built with
+Source for <https://qrmi-community.github.io/>, built with
 [Hugo](https://gohugo.io/). There is no theme or Node toolchain: the layouts and
 stylesheet live in this repository.
 
@@ -20,7 +20,7 @@ Then, from the repository root:
 hugo server --renderToMemory --poll 700ms
 ```
 
-Open <http://localhost:1313/documentation/>. The page reloads when you save a file.
+Open <http://localhost:1313/>. The page reloads when you save a file.
 
 - `--poll 700ms` is needed for layout changes: Hugo (checked with 0.126 and
   0.167) misses templates that are replaced rather than rewritten, which is
@@ -55,6 +55,7 @@ layouts/_default/ecosystem.html Ecosystem page
 layouts/_default/papers.html    Papers page
 layouts/index.html              Home page: upcoming tutorials, past tutorials, papers
 layouts/tutorials/single.html   Tutorial page
+layouts/robots.txt              robots.txt pointing crawlers at the sitemap
 layouts/partials/               Tutorial and paper lists shared between pages
 static/css/style.css            All styling (light and dark)
 assets/images/presenters/       Presenter photos
@@ -125,9 +126,9 @@ footer statement too.
 `static/css/style.css`. They follow the system theme until the header toggle
 sets `data-theme` on `<html>`.
 
-**Links.** The site is served under `/documentation/`. In templates, build
-internal links with `.RelPermalink` or `relURL`, never a hard-coded `/path`. In
-Markdown, use `{{< relref "page" >}}`.
+**Links.** Build internal links in templates with `.RelPermalink` or `relURL`,
+never a hard-coded `/path`, so the site still works under a sub-path (forks,
+previews). In Markdown, use `{{< relref "page" >}}`.
 
 Upcoming and past tutorials are decided when the site is built, so a tutorial
 moves to "Past tutorials" on the next deploy after its date.
