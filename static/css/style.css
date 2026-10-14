@@ -59,6 +59,15 @@ a.contributor:hover .name { color: var(--accent); }
 .projects li { margin-bottom: 1.1rem; }
 .projects p { margin: .2rem 0 0; }
 .badge { font-size: .75rem; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: .05rem .5rem; margin-left: .35rem; white-space: nowrap; }
+/* Workload manager tags: one colour per manager, readable in light and dark. */
+.tag { --tag: var(--muted); font-size: .75rem; font-weight: 600; color: var(--tag); background: color-mix(in srgb, var(--tag) 14%, transparent); border: 1px solid color-mix(in srgb, var(--tag) 35%, transparent); border-radius: 999px; padding: .05rem .5rem; margin-left: .35rem; white-space: nowrap; }
+.tag-slurm { --tag: light-dark(#1d6e35, #74d491); }
+.tag-pbs { --tag: light-dark(#855400, #f2bc55); }
+.tag-flux { --tag: light-dark(#6a3fb3, #bba3ff); }
+.tag-ocs { --tag: light-dark(#0b6a6e, #62d3d8); }
+.tag-gcs { --tag: light-dark(#9c2366, #f383c2); }
+.tag-lsf { --tag: light-dark(#b0391c, #ff9474); }
+.tag-kubernetes { --tag: light-dark(#2753c2, #8eabff); }
 .tutorials .meta, .papers .meta, .projects .meta, .papers .authors { display: block; color: var(--muted); font-size: .9rem; }
 .papers .authors { font-size: .82rem; }
 .site-footer { border-top: 1px solid var(--border); color: var(--muted); font-size: .9rem; padding-block: 1rem; }

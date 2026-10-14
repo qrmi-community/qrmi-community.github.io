@@ -6,7 +6,7 @@
 <ul class="projects">
   {{- range .items }}
   <li>
-    <a href="{{ .url }}">{{ .name }}</a>{{ with .status }} <span class="badge">{{ . }}</span>{{ end }}
+    <a href="{{ .url }}">{{ .name }}</a>{{ range .tags }} <span class="tag tag-{{ . | urlize }}">{{ . }}</span>{{ end }}{{ with .status }} <span class="badge">{{ . }}</span>{{ end }}
     <span class="meta">{{ strings.TrimPrefix "https://" .url | strings.TrimPrefix "github.com/" }}</span>
     <p>{{ .description }}</p>
   </li>

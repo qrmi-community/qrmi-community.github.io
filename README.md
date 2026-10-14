@@ -99,9 +99,14 @@ to that branch, so update the URL when the branch is merged or renamed.
 ```yaml
     - name: Project name
       url: https://github.com/org/repo
+      tags: [Flux, Kubernetes]    # optional, workload managers it integrates with
       status: under development   # optional badge
       description: One sentence on what it does with QRMI.
 ```
+
+Each tag is coloured by a `.tag-<name>` rule in `static/css/style.css`
+(the name lower-cased, e.g. `.tag-kubernetes`). A new tag needs a color defined there.
+If not defined, it will be shown in a muted color.
 
 **Add a regular page.** Create a Markdown file under `content/`, e.g.
 `content/getting-started.md` with a `title` and `description` in the front matter. It renders with
