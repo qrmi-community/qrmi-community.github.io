@@ -10,7 +10,11 @@
   <link rel="canonical" href="{{ .Permalink }}">
   {{- partial "social-meta.html" . }}
   {{- if and .IsPage (eq .Type "tutorials") }}{{ partial "event-jsonld.html" . }}{{ end }}
+  {{- with (site.GetPage "/blog").OutputFormats.Get "rss" }}
+  <link rel="alternate" type="application/rss+xml" title="{{ site.Title }} blog" href="{{ .Permalink }}">
+  {{- end }}
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+  <link rel="stylesheet" href="{{ (partial "chroma-css.html" .).RelPermalink }}">
 </head>
 <body>
   <header class="site-header">
@@ -43,5 +47,36 @@
       localStorage.setItem("theme", root.dataset.theme);
     });
   </script>
+  {{- if .Store.Get "hasCode" }}
+  <script>
+    document.querySelectorAll(".code .copy").forEach(button => {
+      button.hidden = false;
+      button.addEventListener("click", async () => {
+        const code = button.closest(".code").querySelector("code").cloneNode(true);
+        code.querySelectorAll(".ln").forEach(n => n.remove());
+        await navigator.clipboard.writeText(code.textContent);
+        button.textContent = "Copied";
+        setTimeout(() => button.textContent = "Copy", 1500);
+      });
+    });
+  </script>
+  {{- end }}
+  {{- if .Store.Get "hasMermaid" }}
+  <script src="{{ "js/mermaid.min.js" | relURL }}"></script>
+  <script>
+    // Draw the diagrams again in the matching theme when the site theme changes.
+    const drawDiagrams = () => {
+      const root = document.documentElement;
+      const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      mermaid.initialize({ startOnLoad: false, theme: dark ? "dark" : "default" });
+      const nodes = document.querySelectorAll("pre.mermaid");
+      nodes.forEach(n => { n.dataset.src ??= n.textContent; n.textContent = n.dataset.src; n.removeAttribute("data-processed"); });
+      mermaid.run({ nodes });
+    };
+    drawDiagrams();
+    document.querySelector(".theme-toggle").addEventListener("click", drawDiagrams);
+    matchMedia("(prefers-color-scheme: dark)").addEventListener("change", drawDiagrams);
+  </script>
+  {{- end }}
 </body>
 </html>

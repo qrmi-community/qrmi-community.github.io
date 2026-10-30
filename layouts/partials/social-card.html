@@ -3,10 +3,15 @@
   eyebrow are drawn three times, 1px apart, as a faux bold that survives the
   downscaling social networks apply. */ -}}
 {{- $base := resources.Get "images/card-base.png" }}
-{{- $presenters := where (.Params.presenters | default slice) "photo" "!=" nil }}
+{{- $photos := slice }}
+{{- range .Params.presenters }}{{ with .photo }}{{ $photos = $photos | append . }}{{ end }}{{ end }}
+{{- range .GetTerms "authors" }}{{ with .Params.photo }}{{ $photos = $photos | append . }}{{ end }}{{ end }}
+{{- with .Params.photo }}{{ $photos = $photos | append . }}{{ end }}
 {{- $eyebrow := .Params.event | default (cond .IsHome "Quantum Resource Management Interface" site.Title) }}
 {{- with .Params.city }}{{ $eyebrow = printf "%s · %s" $eyebrow . }}{{ end }}
-{{- $subY := cond (gt (len $presenters) 0) 345 260 }}
+{{- $sub := .Params.when | default .Params.affiliation | default .Description }}
+{{- if and .IsPage (eq .Section "blog") }}{{ $eyebrow = "QRMI Community Blog" }}{{ $sub = .Date.Format "January 2, 2006" }}{{ end }}
+{{- $subY := cond (gt (len $photos) 0) 345 260 }}
 {{- $titleFilters := slice }}
 {{- $eyebrowFilters := slice }}
 {{- range seq 0 2 }}
@@ -14,11 +19,11 @@
 {{- $eyebrowFilters = $eyebrowFilters | append (images.Text (upper $eyebrow) (dict "size" 30 "color" "#a9b6ff" "x" (add 96 .) "y" 84)) }}
 {{- end }}
 {{- $title := $base.Crop "1010x250 Center" | images.Filter $titleFilters }}
-{{- $sub := $base.Crop (printf "1008x%d Center" (sub 570 $subY)) | images.Filter (images.Text (.Params.when | default .Description) (dict "size" 34 "color" "#d5d9e0" "linespacing" 6 "x" 0 "y" 0)) }}
+{{- $sub := $base.Crop (printf "1008x%d Center" (sub 570 $subY)) | images.Filter (images.Text $sub (dict "size" 34 "color" "#d5d9e0" "linespacing" 6 "x" 0 "y" 0)) }}
 {{- $filters := $eyebrowFilters | append (images.Overlay $title 96 135) (images.Overlay $sub 96 $subY) }}
 {{- $mask := resources.Get "images/circle-mask.png" }}
-{{- range $i, $p := $presenters }}
-{{- $photo := (resources.Get $p.photo).Fill "120x120 Center png" | images.Filter (images.Mask $mask) }}
+{{- range $i, $p := $photos }}
+{{- $photo := (resources.Get $p).Fill "120x120 Center png" | images.Filter (images.Mask $mask) }}
 {{- $filters = $filters | append (images.Overlay $photo (add 96 (mul $i 136)) 430) }}
 {{- end }}
 {{- return ($base | images.Filter $filters).Process "jpg q90" }}

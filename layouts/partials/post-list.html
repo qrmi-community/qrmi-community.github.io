@@ -1,0 +1,9 @@
+<ul class="posts">
+  {{- range . }}
+  <li>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    <span class="meta">{{ .Date.Format "January 2, 2006" }}{{ with .Params.authors }} · {{ delimit . ", " " and " }}{{ end }}</span>
+    <p>{{ .Description }}</p>
+  </li>
+  {{- end }}
+</ul>
