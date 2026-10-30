@@ -1,0 +1,4 @@
+{{- /* Render $…$ and $$…$$ to MathML at build time: no maths script or fonts in the browser. */ -}}
+{{- with try (transform.ToMath .Inner (dict "output" "mathml" "displayMode" (eq .Type "block"))) }}
+  {{- with .Err }}{{ errorf "Cannot render maths at %s: %s" $.Position . }}{{ else }}{{ .Value }}{{ end }}
+{{- end -}}

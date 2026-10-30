@@ -2,9 +2,29 @@ baseURL = "https://qrmi-community.github.io/"
 locale = "en-US"
 title = "QRMI Community"
 buildFuture = true
-disableKinds = ["taxonomy", "term", "RSS"]
 enableGitInfo = true
 enableRobotsTXT = true
+
+# Only the blog has a feed: it sets outputs: [html, rss] in its front matter.
+[outputs]
+home = ["html"]
+section = ["html"]
+taxonomy = ["html"]
+term = ["html"]
+
+[taxonomies]
+author = "authors"
+
+# Code is coloured by classes styled in assets/css/chroma/; maths is rendered to
+# MathML at build time by layouts/_markup/render-passthrough.html.
+[markup.highlight]
+noClasses = false
+lineNumbersInTable = false
+[markup.goldmark.extensions.passthrough]
+enable = true
+[markup.goldmark.extensions.passthrough.delimiters]
+block = [['\[', '\]'], ['$$', '$$']]
+inline = [['\(', '\)'], ['$', '$']]
 
 [frontmatter]
 lastmod = [":git", "lastmod", ":fileModTime"]
@@ -23,10 +43,14 @@ name = "Papers"
 pageRef = "/papers"
 weight = 3
 [[menu.main]]
+name = "Blog"
+pageRef = "/blog"
+weight = 4
+[[menu.main]]
 name = "Docs"
 url = "https://qiskit-community.github.io/qrmi/"
-weight = 4
+weight = 5
 [[menu.main]]
 name = "GitHub"
 url = "https://github.com/qiskit-community/qrmi"
-weight = 5
+weight = 6

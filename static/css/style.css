@@ -54,9 +54,28 @@ a.contributor:hover .name { color: var(--accent); }
 .contributors .initials { display: grid; place-items: center; background: var(--border); color: var(--muted); font-weight: 700; }
 .contributors .name { display: block; font-weight: 600; }
 .contributors .affiliation { color: var(--muted); font-size: .9rem; }
-.tutorials, .papers, .projects { list-style: none; padding: 0; }
+.tutorials, .papers, .projects, .posts { list-style: none; padding: 0; }
 .tutorials li, .papers li { margin-bottom: 1.1rem; }
-.projects li { margin-bottom: 1.1rem; }
+.projects li, .posts li { margin-bottom: 1.1rem; }
+.posts p { margin: .2rem 0 0; }
+article img { max-width: 100%; height: auto; }
+pre, code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+pre { overflow-x: auto; padding: .85rem 1rem; border-radius: 8px; font-size: .85rem; line-height: 1.55; background: var(--panel); border: 1px solid var(--border); }
+.code { margin: 1.5rem 0; }
+.code figcaption { display: flex; justify-content: space-between; align-items: center; padding: .3rem .5rem .3rem 1rem; font-size: .8rem; color: var(--muted); background: var(--panel); border: 1px solid var(--border); border-bottom: 0; border-radius: 8px 8px 0 0; }
+.code pre { margin: 0; border-radius: 0 0 8px 8px; border-top-color: color-mix(in srgb, var(--border) 50%, transparent); }
+.code .copy { font: inherit; color: var(--muted); background: none; border: 1px solid var(--border); border-radius: 5px; padding: .1rem .55rem; cursor: pointer; }
+.code .copy:hover { color: var(--accent); border-color: var(--accent); }
+.chroma code { display: inline-block; min-width: 100%; }
+.chroma .hl { margin: 0 -1rem; padding: 0 1rem; }
+pre.mermaid { text-align: center; background: none; border: 0; }
+math[display="block"] { overflow-x: auto; }
+.byline a { color: inherit; }
+.profile { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+.profile img { flex: none; border-radius: 50%; object-fit: cover; }
+.profile h1 { margin: 0; }
+.profile p { margin: .2rem 0 0; }
+.profile .affiliation { color: var(--muted); }
 .projects p { margin: .2rem 0 0; }
 .badge { font-size: .75rem; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: .05rem .5rem; margin-left: .35rem; white-space: nowrap; }
 /* Workload manager tags: one colour per manager, readable in light and dark. */
@@ -68,7 +87,7 @@ a.contributor:hover .name { color: var(--accent); }
 .tag-gcs { --tag: light-dark(#9c2366, #f383c2); }
 .tag-lsf { --tag: light-dark(#b0391c, #ff9474); }
 .tag-kubernetes { --tag: light-dark(#2753c2, #8eabff); }
-.tutorials .meta, .papers .meta, .projects .meta, .papers .authors { display: block; color: var(--muted); font-size: .9rem; }
+.tutorials .meta, .papers .meta, .projects .meta, .posts .meta, .papers .authors { display: block; color: var(--muted); font-size: .9rem; }
 .papers .authors { font-size: .82rem; }
 .site-footer { border-top: 1px solid var(--border); color: var(--muted); font-size: .9rem; padding-block: 1rem; }
 .site-footer p { margin: .4rem 0; }

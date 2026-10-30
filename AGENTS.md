@@ -6,7 +6,8 @@ first: it covers running, layout and common edits.
 ## What this is
 
 The QRMI community website: a Hugo static site with its own layouts and CSS (no
-theme, no Node, no JavaScript). Deployed to
+theme, no Node). The only JavaScript is the theme toggle and Mermaid, which is
+served from `static/js/` and loaded only on pages with a diagram. Deployed to
 <https://qrmi-community.github.io/> by `.github/workflows/hugo.yml`.
 
 ## Conventions
@@ -33,8 +34,11 @@ theme, no Node, no JavaScript). Deployed to
   The footer in `layouts/_default/baseof.html` says so. If a change adds
   cookies, analytics, tracking, embeds, or third-party scripts, fonts or images,
   update that statement in the same change and tell the maintainers.
+- Blog posts need an author profile in `content/authors/` for each name in
+  `authors`. Bios state only what the author or a public source says.
 - Keep CSS in `static/css/style.css`, using the colour variables so light and
-  dark modes both work.
+  dark modes both work. Code colours are the exception: the Chroma styles in
+  `assets/css/chroma/` (see README).
 
 ## Verify
 

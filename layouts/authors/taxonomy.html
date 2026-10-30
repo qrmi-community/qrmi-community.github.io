@@ -1,0 +1,7 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+<ul class="presenters">
+  {{- range .Pages }}{{ partial "person.html" (dict "person" (dict "name" .LinkTitle "affiliation" .Params.affiliation "photo" .Params.photo "url" .RelPermalink) "class" "presenter") }}{{ end }}
+</ul>
+{{ end }}

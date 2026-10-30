@@ -22,34 +22,12 @@
 
   <h2>Presenters</h2>
   <ul class="presenters">
-    {{- range .Params.presenters }}
-    <li>
-      {{- if .url }}<a class="presenter" href="{{ .url }}">{{ else }}<div class="presenter">{{ end }}
-      {{- with .photo }}
-      <img src="{{ (resources.Get .).RelPermalink }}" alt="" width="64" height="64" loading="lazy">
-      {{- else }}
-      <span class="initials" aria-hidden="true">{{ range split .name " " }}{{ substr . 0 1 }}{{ end }}</span>
-      {{- end }}
-      <div><span class="name">{{ .name }}</span><span class="affiliation">{{ .affiliation }}</span></div>
-      {{ if .url }}</a>{{ else }}</div>{{ end }}
-    </li>
-    {{- end }}
+    {{- range .Params.presenters }}{{ partial "person.html" (dict "person" . "class" "presenter") }}{{ end }}
   </ul>
 
   <h2>Contributors</h2>
   <ul class="contributors">
-    {{- range .Params.contributors }}
-    <li>
-      {{- if .url }}<a class="contributor" href="{{ .url }}">{{ else }}<div class="contributor">{{ end }}
-      {{- with .photo }}
-      <img src="{{ (resources.Get .).RelPermalink }}" alt="" width="64" height="64" loading="lazy">
-      {{- else }}
-      <span class="initials" aria-hidden="true">{{ range split .name " " }}{{ substr . 0 1 }}{{ end }}</span>
-      {{- end }}
-      <div><span class="name">{{ .name }}</span><span class="affiliation">{{ .affiliation }}</span></div>
-      {{ if .url }}</a>{{ else }}</div>{{ end }}
-    </li>
-    {{- end }}
+    {{- range .Params.contributors }}{{ partial "person.html" (dict "person" . "class" "contributor") }}{{ end }}
   </ul>
 </article>
 {{ end }}

@@ -1,0 +1,14 @@
+{{ define "main" }}
+<article>
+  <p class="eyebrow byline">{{ .Date.Format "January 2, 2006" }}
+    {{- with .GetTerms "authors" }} · {{ range $i, $a := . }}{{ if $i }}{{ if eq (add $i 1) (len $.Params.authors) }} and {{ else }}, {{ end }}{{ end }}<a href="{{ $a.RelPermalink }}">{{ $a.LinkTitle }}</a>{{ end }}{{ end }}</p>
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  {{- with .GetTerms "authors" }}
+  <h2>About the authors</h2>
+  <ul class="presenters">
+    {{- range . }}{{ partial "person.html" (dict "person" (dict "name" .LinkTitle "affiliation" .Params.affiliation "photo" .Params.photo "url" .RelPermalink) "class" "presenter") }}{{ end }}
+  </ul>
+  {{- end }}
+</article>
+{{ end }}

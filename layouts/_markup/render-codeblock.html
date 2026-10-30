@@ -1,0 +1,8 @@
+{{- /* A highlighted code block with a header: the title attribute or the language name, and a copy button
+  that the script in baseof.html shows. Attributes such as linenos and hl_lines pass through to Chroma. */ -}}
+{{- $names := dict "bash" "Bash" "c" "C" "console" "Console" "cpp" "C++" "go" "Go" "json" "JSON" "lua" "Lua" "python" "Python" "rust" "Rust" "sh" "Shell" "toml" "TOML" "yaml" "YAML" }}
+{{- .Page.Store.Set "hasCode" true }}
+<figure class="code">
+  <figcaption><span>{{ .Attributes.title | default (index $names .Type) | default .Type }}</span><button class="copy" type="button" hidden>Copy</button></figcaption>
+  {{- (transform.HighlightCodeBlock .).Wrapped }}
+</figure>

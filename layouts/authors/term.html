@@ -1,0 +1,21 @@
+{{ define "main" }}
+<article>
+  <header class="profile">
+    {{- with .Params.photo }}
+    <img src="{{ (resources.Get .).RelPermalink }}" alt="" width="112" height="112">
+    {{- end }}
+    <div>
+      <h1>{{ .Title }}</h1>
+      <p class="affiliation">{{ .Params.affiliation }}</p>
+      {{- with .Params.links }}
+      <p class="links">{{ range $i, $l := . }}{{ if $i }} · {{ end }}<a href="{{ $l.url }}">{{ $l.name }}</a>{{ end }}</p>
+      {{- end }}
+    </div>
+  </header>
+  {{ .Content }}
+  {{- with .Pages }}
+  <h2>Posts</h2>
+  {{ partial "post-list.html" . }}
+  {{- end }}
+</article>
+{{ end }}
