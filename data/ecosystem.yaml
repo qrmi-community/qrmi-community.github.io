@@ -13,6 +13,10 @@
 
 - group: Workload managers
   items:
+    - name: QRMI Plugin for Slurm HRES
+      url: https://github.com/qrmi-community/slurm-hres-plugins
+      tags: [Slurm, NEW]
+      description: Slurm HRES Plugin lets the Slurm workload manager schedule QRMI quantum resources alongside CPUs and GPUs.
     - name: Slurm
       url: https://github.com/qiskit-community/spank-plugins
       tags: [Slurm]
